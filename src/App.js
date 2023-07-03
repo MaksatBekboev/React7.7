@@ -1,25 +1,49 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import './index.css';
 
-function App() {
+const RegistrationForm = () => {
+  const { register, handleSubmit } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <form className="form" onSubmit={handleSubmit(onSubmit)}>
+      <div className="form-group">
+        <label htmlFor="firstName" className="form-label">Фамилия:</label>
+        <input type="text" id="firstName" className="form-input" {...register('firstName', { required: true })} />
+      </div>
 
-export default App;
+      <div className="form-group">
+        <label htmlFor="lastName" className="form-label">Имя:</label>
+        <input type="text" id="lastName" className="form-input" {...register('lastName', { required: true })} />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="middleName" className="form-label">Отчество:</label>
+        <input type="text" id="middleName" className="form-input" {...register('middleName')} />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="birthYear" className="form-label">Год рождения:</label>
+        <input type="number" id="birthYear" className="form-input" {...register('birthYear', { required: true })} />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="phoneNumber" className="form-label">Номер телефона:</label>
+        <input type="tel" id="phoneNumber" className="form-input" {...register('phoneNumber', { required: true })} />
+      </div>
+
+      <div className="form-group">
+        <label htmlFor="email" className="form-label">Email:</label>
+        <input type="email" id="email" className="form-input" {...register('email', { required: true })} />
+      </div>
+
+      <button type="submit" className="form-button">Зарегистрироваться</button>
+    </form>
+  );
+};
+
+export default RegistrationForm;
